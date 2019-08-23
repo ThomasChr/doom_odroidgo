@@ -24,12 +24,8 @@
 /* #undef HAVE_LIBPNG */
 /* libsamplerate installed */
 /* #undef HAVE_LIBSAMPLERATE */
-/* Define to 1 if you have the <linux/kd.h> header file. */
-#define HAVE_LINUX_KD_H 1
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
-/* Define to 1 if you have the `mmap' function. */
-#define HAVE_MMAP 1
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
 /* Define to 1 if you have the <stdlib.h> header file. */
