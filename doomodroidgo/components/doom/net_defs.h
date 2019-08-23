@@ -28,13 +28,15 @@
 // NET_MAXPLAYERS, as there may be observers that are not participating
 // (eg. left/right monitors)
 
-#define MAXNETNODES 16
+//#define MAXNETNODES 16
+#define MAXNETNODES 2
 
 // The maximum number of players, multiplayer/networking.
 // This is the maximum supported by the networking code; individual games
 // have their own values for MAXPLAYERS that can be smaller.
 
-#define NET_MAXPLAYERS 8
+//#define NET_MAXPLAYERS 8
+#define NET_MAXPLAYERS 2
 
 // Maximum length of a player's name.
 
@@ -42,8 +44,8 @@
 
 // Networking and tick handling related.
 
-//define BACKUPTICS 128
-#define BACKUPTICS 32
+//#define BACKUPTICS 128
+#define BACKUPTICS 2 
 
 typedef struct _net_module_s net_module_t;
 typedef struct _net_packet_s net_packet_t;
