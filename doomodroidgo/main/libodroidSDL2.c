@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "SDL_net.h"
+#include "SDL_mixer.h"
 
 int SDLCALL SDL_BuildAudioCVT(SDL_AudioCVT * cvt, SDL_AudioFormat src_format, Uint8 src_channels, int src_rate, SDL_AudioFormat dst_format, Uint8 dst_channels, int dst_rate)
 {
@@ -604,6 +605,150 @@ void SDLCALL SDL_WaitThread(SDL_Thread * thread, int *status)
 }
 
 void SDLCALL SDL_WarpMouseInWindow(SDL_Window * window, int x, int y)
+{
+    /* TODO */
+    return;
+}
+
+int SDLCALL SDLNet_UDP_Send(UDPsocket sock, int channel, UDPpacket *packet)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL SDLNet_UDP_Recv(UDPsocket sock, UDPpacket *packet)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_HaltMusic(void)
+{
+    /* TODO */
+    return 0;
+}
+
+void SDLCALL Mix_CloseAudio(void)
+{
+    /* TODO */
+    return;
+}
+
+int SDLCALL Mix_QuerySpec(int *frequency,Uint16 *format,int *channels)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_OpenAudio(int frequency, Uint16 format, int channels, int chunksize)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_Init(int flags)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_RegisterEffect(int chan, Mix_EffectFunc_t f, Mix_EffectDone_t d, void *arg)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_VolumeMusic(int volume)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_PlayMusic(Mix_Music *music, int loops)
+{
+    /* TODO */
+    return 0;
+}
+
+void SDLCALL Mix_PauseMusic(void)
+{
+    /* TODO */
+    return;
+}
+
+void SDLCALL Mix_ResumeMusic(void)
+{
+    /* TODO */
+    return;
+}
+
+void SDLCALL Mix_FreeMusic(Mix_Music *music)
+{
+    /* TODO */
+    return;
+}
+
+Mix_Music * SDLCALL Mix_LoadMUS(const char *file)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_PlayingMusic(void)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_SetMusicPosition(double position)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_SetMusicCMD(const char *command)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_HaltChannel(int channel)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_SetPanning(int channel, Uint8 left, Uint8 right)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_PlayChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ticks)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_Playing(int channel)
+{
+    /* TODO */
+    return 0;
+}
+
+int SDLCALL Mix_AllocateChannels(int numchans)
+{
+    /* TODO */
+    return 0;
+}
+
+void SDLCALL Mix_HookMusic(void (SDLCALL *mix_func)(void *udata, Uint8 *stream, int len), void *arg)
+{
+    /* TODO */
+    return;
+}
+
+void SDLCALL Mix_SetPostMix(void (SDLCALL *mix_func)(void *udata, Uint8 *stream, int len), void *arg)
 {
     /* TODO */
     return;
