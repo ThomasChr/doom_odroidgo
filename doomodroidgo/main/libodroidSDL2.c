@@ -753,3 +753,9 @@ void SDLCALL Mix_SetPostMix(void (SDLCALL *mix_func)(void *udata, Uint8 *stream,
     /* TODO */
     return;
 }
+
+SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
+{
+    /* TODO */
+    return 0;
+}
