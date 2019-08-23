@@ -38,7 +38,7 @@ sudo ./esp-idf/install.sh
 . ./esp-idf/export.sh
 cd doomodroidgo
 make clean
-make menuconfig / make
+make
 ```
 -> Grab the files '/build/bootloader/bootloader.bin', '/build/doomodroidgo.bin' and '/build/partitions_singleapp.bin'
 
