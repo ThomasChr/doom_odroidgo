@@ -472,12 +472,6 @@ int SDLCALL SDL_RenderSetLogicalSize(SDL_Renderer * renderer, int w, int h)
     return 0;
 }
 
-SDL_bool SDLCALL SDL_SetHintWithPriority(const char *name, const char *value, SDL_HintPriority priority)
-{
-    /* TODO */
-    return 0;
-}
-
 int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette, const SDL_Color * colors, int firstcolor, int ncolors)
 {
     /* TODO */
