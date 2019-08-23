@@ -1,1 +1,1 @@
-CFLAGS := -Wno-unused-variable -Wno-implicit-function-declaration
+CFLAGS := -Wno-unused-variable -Wno-implicit-function-declaration -mlongcalls
