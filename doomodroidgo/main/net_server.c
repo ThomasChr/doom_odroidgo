@@ -39,6 +39,8 @@
 #include "net_sdl.h"
 #include "net_structrw.h"
 
+#include "esp_attr.h"
+
 // How often to refresh our registration with the master server.
 #define MASTER_REFRESH_PERIOD 30  /* twice per minute */
 
@@ -143,25 +145,25 @@ typedef struct
     net_ticdiff_t diff;
 } net_client_recv_t;
 
-static net_server_state_t server_state;
-static boolean server_initialized = false;
-static net_client_t clients[MAXNETNODES];
-static net_client_t *sv_players[NET_MAXPLAYERS];
-static net_context_t *server_context;
-static unsigned int sv_gamemode;
-static unsigned int sv_gamemission;
-static net_gamesettings_t sv_settings;
+EXT_RAM_ATTR static net_server_state_t server_state;
+EXT_RAM_ATTR static boolean server_initialized = false;
+EXT_RAM_ATTR static net_client_t clients[MAXNETNODES];
+EXT_RAM_ATTR static net_client_t *sv_players[NET_MAXPLAYERS];
+EXT_RAM_ATTR static net_context_t *server_context;
+EXT_RAM_ATTR static unsigned int sv_gamemode;
+EXT_RAM_ATTR static unsigned int sv_gamemission;
+EXT_RAM_ATTR static net_gamesettings_t sv_settings;
 
 // For registration with master server:
 
-static net_addr_t *master_server = NULL;
-static unsigned int master_refresh_time;
-static unsigned int master_resolve_time;
+EXT_RAM_ATTR static net_addr_t *master_server = NULL;
+EXT_RAM_ATTR static unsigned int master_refresh_time;
+EXT_RAM_ATTR static unsigned int master_resolve_time;
 
 // receive window
 
-static unsigned int recvwindow_start;
-static net_client_recv_t recvwindow[BACKUPTICS][NET_MAXPLAYERS];
+EXT_RAM_ATTR static unsigned int recvwindow_start;
+EXT_RAM_ATTR static net_client_recv_t recvwindow[BACKUPTICS][NET_MAXPLAYERS];
 
 #define NET_SV_ExpandTicNum(b) NET_ExpandTicNum(recvwindow_start, (b))
 

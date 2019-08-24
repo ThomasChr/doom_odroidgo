@@ -38,6 +38,8 @@
 #include "net_sdl.h"
 #include "net_loop.h"
 
+#include "esp_attr.h"
+
 // The complete set of data for a particular tic.
 
 typedef struct
@@ -61,61 +63,61 @@ typedef struct
 // from all players.
 //
 
-static ticcmd_set_t ticdata[BACKUPTICS];
+EXT_RAM_ATTR static ticcmd_set_t ticdata[BACKUPTICS];
 
 // The index of the next tic to be made (with a call to BuildTiccmd).
 
-static int maketic;
+EXT_RAM_ATTR static int maketic;
 
 // The number of complete tics received from the server so far.
 
-static int recvtic;
+EXT_RAM_ATTR static int recvtic;
 
 // The number of tics that have been run (using RunTic) so far.
 
-int gametic;
+EXT_RAM_ATTR int gametic;
 
 // When set to true, a single tic is run each time TryRunTics() is called.
 // This is used for -timedemo mode.
 
-boolean singletics = false;
+EXT_RAM_ATTR boolean singletics = false;
 
 // Index of the local player.
 
-static int localplayer;
+EXT_RAM_ATTR static int localplayer;
 
 // Used for original sync code.
 
-static int      skiptics = 0;
+EXT_RAM_ATTR static int      skiptics = 0;
 
 // Reduce the bandwidth needed by sampling game input less and transmitting
 // less.  If ticdup is 2, sample half normal, 3 = one third normal, etc.
 
-int		ticdup;
+EXT_RAM_ATTR int		ticdup;
 
 // Amount to offset the timer for game sync.
 
-fixed_t         offsetms;
+EXT_RAM_ATTR fixed_t         offsetms;
 
 // Use new client syncronisation code
 
-static boolean  new_sync = true;
+EXT_RAM_ATTR static boolean  new_sync = true;
 
 // Callback functions for loop code.
 
-static loop_interface_t *loop_interface = NULL;
+EXT_RAM_ATTR static loop_interface_t *loop_interface = NULL;
 
 // Current players in the multiplayer game.
 // This is distinct from playeringame[] used by the game code, which may
 // modify playeringame[] when playing back multiplayer demos.
 
-static boolean local_playeringame[NET_MAXPLAYERS];
+EXT_RAM_ATTR static boolean local_playeringame[NET_MAXPLAYERS];
 
 // Requested player class "sent" to the server on connect.
 // If we are only doing a single player game then this needs to be remembered
 // and saved in the game settings.
 
-static int player_class;
+EXT_RAM_ATTR static int player_class;
 
 
 // 35 fps clock adjusted by offsetms milliseconds
