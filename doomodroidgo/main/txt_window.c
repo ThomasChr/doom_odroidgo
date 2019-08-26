@@ -520,59 +520,6 @@ void TXT_SetWindowHelpURL(txt_window_t *window, const char *help_url)
     window->help_url = help_url;
 }
 
-#ifdef _WIN32
-
-void TXT_OpenURL(const char *url)
-{
-    ShellExecute(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
-}
-
-#else
-
-void TXT_OpenURL(const char *url)
-{
-    char *cmd;
-    size_t cmd_len;
-    int retval;
-
-    cmd_len = strlen(url) + 30;
-    cmd = malloc(cmd_len);
-
-#if defined(__MACOSX__)
-    TXT_snprintf(cmd, cmd_len, "open \"%s\"", url);
-#else
-    // The Unix situation sucks as usual, but the closest thing to a
-    // standard that exists is the xdg-utils package.
-    if (system("xdg-open --version 2>/dev/null") != 0)
-    {
-        fprintf(stderr,
-                "xdg-utils is not installed. Can't open this URL:\n%s\n", url);
-        free(cmd);
-        return;
-    }
-
-    TXT_snprintf(cmd, cmd_len, "xdg-open \"%s\"", url);
-#endif
-
-    retval = system(cmd);
-    free(cmd);
-    if (retval != 0)
-    {
-        fprintf(stderr, "TXT_OpenURL: error executing '%s'; return code %d\n",
-            cmd, retval);
-    }
-}
-
-#endif /* #ifndef _WIN32 */
-
-void TXT_OpenWindowHelpURL(txt_window_t *window)
-{
-    if (window->help_url != NULL)
-    {
-        TXT_OpenURL(window->help_url);
-    }
-}
-
 txt_window_t *TXT_MessageBox(const char *title, const char *message, ...)
 {
     txt_window_t *window;

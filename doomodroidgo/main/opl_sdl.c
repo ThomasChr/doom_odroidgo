@@ -32,6 +32,8 @@
 
 #include "opl_queue.h"
 
+#include "esp_attr.h"
+
 #define MAX_SOUND_SLICE_TIME 100 /* ms */
 
 typedef struct
@@ -45,52 +47,52 @@ typedef struct
 // When the callback mutex is locked using OPL_Lock, callback functions
 // are not invoked.
 
-static SDL_mutex *callback_mutex = NULL;
+EXT_RAM_ATTR static SDL_mutex *callback_mutex = NULL;
 
 // Queue of callbacks waiting to be invoked.
 
-static opl_callback_queue_t *callback_queue;
+EXT_RAM_ATTR static opl_callback_queue_t *callback_queue;
 
 // Mutex used to control access to the callback queue.
 
-static SDL_mutex *callback_queue_mutex = NULL;
+EXT_RAM_ATTR static SDL_mutex *callback_queue_mutex = NULL;
 
 // Current time, in us since startup:
 
-static uint64_t current_time;
+EXT_RAM_ATTR static uint64_t current_time;
 
 // If non-zero, playback is currently paused.
 
-static int opl_sdl_paused;
+EXT_RAM_ATTR static int opl_sdl_paused;
 
 // Time offset (in us) due to the fact that callbacks
 // were previously paused.
 
-static uint64_t pause_offset;
+EXT_RAM_ATTR static uint64_t pause_offset;
 
 // OPL software emulator structure.
 
-static opl3_chip opl_chip;
-static int opl_opl3mode;
+EXT_RAM_ATTR static opl3_chip opl_chip;
+EXT_RAM_ATTR static int opl_opl3mode;
 
 // Temporary mixing buffer used by the mixing callback.
 
-static uint8_t *mix_buffer = NULL;
+EXT_RAM_ATTR static uint8_t *mix_buffer = NULL;
 
 // Register number that was written.
 
-static int register_num = 0;
+EXT_RAM_ATTR static int register_num = 0;
 
 // Timers; DBOPL does not do timer stuff itself.
 
-static opl_timer_t timer1 = { 12500, 0, 0, 0 };
-static opl_timer_t timer2 = { 3125, 0, 0, 0 };
+EXT_RAM_ATTR static opl_timer_t timer1 = { 12500, 0, 0, 0 };
+EXT_RAM_ATTR static opl_timer_t timer2 = { 3125, 0, 0, 0 };
 
 // SDL parameters.
 
-static int sdl_was_initialized = 0;
-static int mixing_freq, mixing_channels;
-static Uint16 mixing_format;
+EXT_RAM_ATTR static int sdl_was_initialized = 0;
+EXT_RAM_ATTR static int mixing_freq, mixing_channels;
+EXT_RAM_ATTR static Uint16 mixing_format;
 
 static int SDLIsInitialized(void)
 {

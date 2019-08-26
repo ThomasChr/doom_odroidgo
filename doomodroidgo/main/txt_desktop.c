@@ -280,7 +280,7 @@ static void DesktopInputEvent(int c)
             active_window = TXT_GetActiveWindow();
             if (active_window != NULL)
             {
-                TXT_OpenWindowHelpURL(active_window);
+                //TXT_OpenWindowHelpURL(active_window);
             }
             break;
 

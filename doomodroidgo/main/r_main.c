@@ -35,7 +35,7 @@
 #include "r_local.h"
 #include "r_sky.h"
 
-
+#include "esp_attr.h"
 
 
 
@@ -44,65 +44,65 @@
 
 
 
-int			viewangleoffset;
+EXT_RAM_ATTR int			viewangleoffset;
 
 // increment every time a check is made
-int			validcount = 1;		
+EXT_RAM_ATTR int			validcount = 1;		
 
 
-lighttable_t*		fixedcolormap;
-extern lighttable_t**	walllights;
+EXT_RAM_ATTR lighttable_t*		fixedcolormap;
+EXT_RAM_ATTR extern lighttable_t**	walllights;
 
-int			centerx;
-int			centery;
+EXT_RAM_ATTR int			centerx;
+EXT_RAM_ATTR int			centery;
 
-fixed_t			centerxfrac;
-fixed_t			centeryfrac;
-fixed_t			projection;
+EXT_RAM_ATTR fixed_t			centerxfrac;
+EXT_RAM_ATTR fixed_t			centeryfrac;
+EXT_RAM_ATTR fixed_t			projection;
 
 // just for profiling purposes
-int			framecount;	
+EXT_RAM_ATTR int			framecount;	
 
-int			sscount;
-int			linecount;
-int			loopcount;
+EXT_RAM_ATTR int			sscount;
+EXT_RAM_ATTR int			linecount;
+EXT_RAM_ATTR int			loopcount;
 
-fixed_t			viewx;
-fixed_t			viewy;
-fixed_t			viewz;
+EXT_RAM_ATTR fixed_t			viewx;
+EXT_RAM_ATTR fixed_t			viewy;
+EXT_RAM_ATTR fixed_t			viewz;
 
-angle_t			viewangle;
+EXT_RAM_ATTR angle_t			viewangle;
 
-fixed_t			viewcos;
-fixed_t			viewsin;
+EXT_RAM_ATTR fixed_t			viewcos;
+EXT_RAM_ATTR fixed_t			viewsin;
 
-player_t*		viewplayer;
+EXT_RAM_ATTR player_t*		viewplayer;
 
 // 0 = high, 1 = low
-int			detailshift;	
+EXT_RAM_ATTR int			detailshift;	
 
 //
 // precalculated math tables
 //
-angle_t			clipangle;
+EXT_RAM_ATTR angle_t			clipangle;
 
 // The viewangletox[viewangle + FINEANGLES/4] lookup
 // maps the visible view angles to screen X coordinates,
 // flattening the arc to a flat projection plane.
 // There will be many angles mapped to the same X. 
-int			viewangletox[FINEANGLES/2];
+EXT_RAM_ATTR int			viewangletox[FINEANGLES/2];
 
 // The xtoviewangleangle[] table maps a screen pixel
 // to the lowest viewangle that maps back to x ranges
 // from clipangle to -clipangle.
-angle_t			xtoviewangle[SCREENWIDTH+1];
+EXT_RAM_ATTR angle_t			xtoviewangle[SCREENWIDTH+1];
 
-lighttable_t*		scalelight[LIGHTLEVELS][MAXLIGHTSCALE];
-lighttable_t*		scalelightfixed[MAXLIGHTSCALE];
-lighttable_t*		zlight[LIGHTLEVELS][MAXLIGHTZ];
+EXT_RAM_ATTR lighttable_t*		scalelight[LIGHTLEVELS][MAXLIGHTSCALE];
+EXT_RAM_ATTR lighttable_t*		scalelightfixed[MAXLIGHTSCALE];
+EXT_RAM_ATTR lighttable_t*		zlight[LIGHTLEVELS][MAXLIGHTZ];
 
 // bumped light from gun blasts
-int			extralight;			
+EXT_RAM_ATTR int			extralight;			
 
 
 
