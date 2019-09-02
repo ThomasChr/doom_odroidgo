@@ -101,45 +101,45 @@ typedef struct
     net_ticdiff_t cmd;
 } net_server_send_t;
 
-EXT_RAM_ATTR extern fixed_t offsetms;
+extern fixed_t offsetms;
 
-EXT_RAM_ATTR static net_connection_t client_connection;
-EXT_RAM_ATTR static net_clientstate_t client_state;
-EXT_RAM_ATTR static net_addr_t *server_addr;
-EXT_RAM_ATTR static net_context_t *client_context;
+static net_connection_t client_connection;
+static net_clientstate_t client_state;
+static net_addr_t *server_addr;
+static net_context_t *client_context;
 
 // game settings, as received from the server when the game started
 
-EXT_RAM_ATTR static net_gamesettings_t settings;
+static net_gamesettings_t settings;
 
 // Why did the server reject us?
-EXT_RAM_ATTR char *net_client_reject_reason = NULL;
+char *net_client_reject_reason = NULL;
 
 // true if the client code is in use
 
-EXT_RAM_ATTR boolean net_client_connected;
+boolean net_client_connected;
 
 // true if we have received waiting data from the server,
 // and the wait data that was received.
 
-EXT_RAM_ATTR boolean net_client_received_wait_data;
-EXT_RAM_ATTR net_waitdata_t net_client_wait_data;
+boolean net_client_received_wait_data;
+net_waitdata_t net_client_wait_data;
 
 // Waiting at the initial wait screen for the game to be launched?
 
-EXT_RAM_ATTR boolean net_waiting_for_launch = false;
+boolean net_waiting_for_launch = false;
 
 // Name that we send to the server
 
-EXT_RAM_ATTR char *net_player_name = NULL;
+char *net_player_name = NULL;
 
 // Connected but not participating in the game (observer)
 
-EXT_RAM_ATTR boolean drone = false;
+boolean drone = false;
 
 // The last ticcmd constructed
 
-EXT_RAM_ATTR static ticcmd_t last_ticcmd;
+static ticcmd_t last_ticcmd;
 
 // Buffer of ticcmd diffs being sent to the server
 
@@ -148,29 +148,29 @@ EXT_RAM_ATTR static net_server_send_t send_queue[BACKUPTICS];
 // Receive window
 
 EXT_RAM_ATTR static ticcmd_t recvwindow_cmd_base[NET_MAXPLAYERS];
-EXT_RAM_ATTR static int recvwindow_start;
+static int recvwindow_start;
 EXT_RAM_ATTR static net_server_recv_t recvwindow[BACKUPTICS];
 
 // Whether we need to send an acknowledgement and
 // when gamedata was last received.
 
-EXT_RAM_ATTR static boolean need_to_acknowledge;
-EXT_RAM_ATTR static unsigned int gamedata_recv_time;
+static boolean need_to_acknowledge;
+static unsigned int gamedata_recv_time;
 
 // The latency (time between when we sent our command and we got all
 // the other players' commands from the server) for the last tic we
 // received. We include this latency in tics we send to the server so
 // that they can adjust to us.
-EXT_RAM_ATTR static int last_latency;
+static int last_latency;
 
 // Hash checksums of our wad directory and dehacked data.
 
-EXT_RAM_ATTR sha1_digest_t net_local_wad_sha1sum;
-EXT_RAM_ATTR sha1_digest_t net_local_deh_sha1sum;
+sha1_digest_t net_local_wad_sha1sum;
+sha1_digest_t net_local_deh_sha1sum;
 
 // Are we playing with the freedoom IWAD?
 
-EXT_RAM_ATTR unsigned int net_local_is_freedoom;
+unsigned int net_local_is_freedoom;
 
 #define NET_CL_ExpandTicNum(b) NET_ExpandTicNum(recvwindow_start, (b))
 

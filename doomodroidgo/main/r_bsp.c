@@ -37,14 +37,14 @@
 
 #include "esp_attr.h"
 
-EXT_RAM_ATTR seg_t*		curline;
-EXT_RAM_ATTR side_t*		sidedef;
-EXT_RAM_ATTR line_t*		linedef;
-EXT_RAM_ATTR sector_t*	frontsector;
-EXT_RAM_ATTR sector_t*	backsector;
+seg_t*		curline;
+side_t*		sidedef;
+line_t*		linedef;
+sector_t*	frontsector;
+sector_t*	backsector;
 
 EXT_RAM_ATTR drawseg_t	drawsegs[MAXDRAWSEGS];
-EXT_RAM_ATTR drawseg_t*	ds_p;
+drawseg_t*	ds_p;
 
 
 void

@@ -44,14 +44,14 @@ planefunction_t		ceilingfunc;
 // Here comes the obnoxious "visplane".
 #define MAXVISPLANES	128
 EXT_RAM_ATTR visplane_t		visplanes[MAXVISPLANES];
-EXT_RAM_ATTR visplane_t*		lastvisplane;
-EXT_RAM_ATTR visplane_t*		floorplane;
-EXT_RAM_ATTR visplane_t*		ceilingplane;
+visplane_t*		lastvisplane;
+visplane_t*		floorplane;
+visplane_t*		ceilingplane;
 
 // ?
 #define MAXOPENINGS	SCREENWIDTH*64
 EXT_RAM_ATTR short			openings[MAXOPENINGS];
-EXT_RAM_ATTR short*			lastopening;
+short*			lastopening;
 
 
 //
@@ -72,13 +72,13 @@ EXT_RAM_ATTR int			spanstop[SCREENHEIGHT];
 //
 // texture mapping
 //
-EXT_RAM_ATTR lighttable_t**		planezlight;
-EXT_RAM_ATTR fixed_t			planeheight;
+lighttable_t**		planezlight;
+fixed_t			planeheight;
 
 EXT_RAM_ATTR fixed_t			yslope[SCREENHEIGHT];
 EXT_RAM_ATTR fixed_t			distscale[SCREENWIDTH];
-EXT_RAM_ATTR fixed_t			basexscale;
-EXT_RAM_ATTR fixed_t			baseyscale;
+fixed_t			basexscale;
+fixed_t			baseyscale;
 
 EXT_RAM_ATTR fixed_t			cachedheight[SCREENHEIGHT];
 EXT_RAM_ATTR fixed_t			cacheddistance[SCREENHEIGHT];

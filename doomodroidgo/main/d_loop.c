@@ -67,45 +67,45 @@ EXT_RAM_ATTR static ticcmd_set_t ticdata[BACKUPTICS];
 
 // The index of the next tic to be made (with a call to BuildTiccmd).
 
-EXT_RAM_ATTR static int maketic;
+static int maketic;
 
 // The number of complete tics received from the server so far.
 
-EXT_RAM_ATTR static int recvtic;
+static int recvtic;
 
 // The number of tics that have been run (using RunTic) so far.
 
-EXT_RAM_ATTR int gametic;
+int gametic;
 
 // When set to true, a single tic is run each time TryRunTics() is called.
 // This is used for -timedemo mode.
 
-EXT_RAM_ATTR boolean singletics = false;
+boolean singletics = false;
 
 // Index of the local player.
 
-EXT_RAM_ATTR static int localplayer;
+static int localplayer;
 
 // Used for original sync code.
 
-EXT_RAM_ATTR static int      skiptics = 0;
+static int      skiptics = 0;
 
 // Reduce the bandwidth needed by sampling game input less and transmitting
 // less.  If ticdup is 2, sample half normal, 3 = one third normal, etc.
 
-EXT_RAM_ATTR int		ticdup;
+int		ticdup;
 
 // Amount to offset the timer for game sync.
 
-EXT_RAM_ATTR fixed_t         offsetms;
+fixed_t         offsetms;
 
 // Use new client syncronisation code
 
-EXT_RAM_ATTR static boolean  new_sync = true;
+static boolean  new_sync = true;
 
 // Callback functions for loop code.
 
-EXT_RAM_ATTR static loop_interface_t *loop_interface = NULL;
+static loop_interface_t *loop_interface = NULL;
 
 // Current players in the multiplayer game.
 // This is distinct from playeringame[] used by the game code, which may
@@ -117,7 +117,7 @@ EXT_RAM_ATTR static boolean local_playeringame[NET_MAXPLAYERS];
 // If we are only doing a single player game then this needs to be remembered
 // and saved in the game settings.
 
-EXT_RAM_ATTR static int player_class;
+static int player_class;
 
 
 // 35 fps clock adjusted by offsetms milliseconds

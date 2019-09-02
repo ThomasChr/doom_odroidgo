@@ -44,47 +44,47 @@
 
 
 
-EXT_RAM_ATTR int			viewangleoffset;
+int			viewangleoffset;
 
 // increment every time a check is made
-EXT_RAM_ATTR int			validcount = 1;		
+int			validcount = 1;		
 
 
-EXT_RAM_ATTR lighttable_t*		fixedcolormap;
-EXT_RAM_ATTR extern lighttable_t**	walllights;
+lighttable_t*		fixedcolormap;
+extern lighttable_t**	walllights;
 
-EXT_RAM_ATTR int			centerx;
-EXT_RAM_ATTR int			centery;
+int			centerx;
+int			centery;
 
-EXT_RAM_ATTR fixed_t			centerxfrac;
-EXT_RAM_ATTR fixed_t			centeryfrac;
-EXT_RAM_ATTR fixed_t			projection;
+fixed_t			centerxfrac;
+fixed_t			centeryfrac;
+fixed_t			projection;
 
 // just for profiling purposes
-EXT_RAM_ATTR int			framecount;	
+int			framecount;	
 
-EXT_RAM_ATTR int			sscount;
-EXT_RAM_ATTR int			linecount;
-EXT_RAM_ATTR int			loopcount;
+int			sscount;
+int			linecount;
+int			loopcount;
 
-EXT_RAM_ATTR fixed_t			viewx;
-EXT_RAM_ATTR fixed_t			viewy;
-EXT_RAM_ATTR fixed_t			viewz;
+fixed_t			viewx;
+fixed_t			viewy;
+fixed_t			viewz;
 
-EXT_RAM_ATTR angle_t			viewangle;
+angle_t			viewangle;
 
-EXT_RAM_ATTR fixed_t			viewcos;
-EXT_RAM_ATTR fixed_t			viewsin;
+fixed_t			viewcos;
+fixed_t			viewsin;
 
-EXT_RAM_ATTR player_t*		viewplayer;
+player_t*		viewplayer;
 
 // 0 = high, 1 = low
-EXT_RAM_ATTR int			detailshift;	
+int			detailshift;	
 
 //
 // precalculated math tables
 //
-EXT_RAM_ATTR angle_t			clipangle;
+angle_t			clipangle;
 
 // The viewangletox[viewangle + FINEANGLES/4] lookup
 // maps the visible view angles to screen X coordinates,
@@ -102,7 +102,7 @@ EXT_RAM_ATTR lighttable_t*		scalelightfixed[MAXLIGHTSCALE];
 EXT_RAM_ATTR lighttable_t*		zlight[LIGHTLEVELS][MAXLIGHTZ];
 
 // bumped light from gun blasts
-EXT_RAM_ATTR int			extralight;			
+int			extralight;			
 
 
 

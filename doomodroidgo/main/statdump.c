@@ -32,19 +32,19 @@
 #include "esp_attr.h"
 
 /* Par times for E1M1-E1M9. */
-EXT_RAM_ATTR static const int doom1_par_times[] =
+ static const int doom1_par_times[] =
 {
     30, 75, 120, 90, 165, 180, 180, 30, 165,
 };
 
 /* Par times for MAP01-MAP09. */
-EXT_RAM_ATTR static const int doom2_par_times[] =
+ static const int doom2_par_times[] =
 {
     30, 90, 120, 120, 90, 150, 120, 120, 270,
 };
 
 /* Player colors. */
-EXT_RAM_ATTR static const char *player_colors[] =
+ static const char *player_colors[] =
 {
     "Green", "Indigo", "Brown", "Red"
 };
@@ -53,9 +53,9 @@ EXT_RAM_ATTR static const char *player_colors[] =
 
 #define MAX_CAPTURES 32
 EXT_RAM_ATTR static wbstartstruct_t captured_stats[MAX_CAPTURES];
-EXT_RAM_ATTR static int num_captured_stats = 0;
+ static int num_captured_stats = 0;
 
-EXT_RAM_ATTR static GameMission_t discovered_gamemission = none;
+ static GameMission_t discovered_gamemission = none;
 
 /* Try to work out whether this is a Doom 1 or Doom 2 game, by looking
  * at the episode and map, and the par times.  This is used to decide

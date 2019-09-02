@@ -281,6 +281,7 @@ static void DesktopInputEvent(int c)
             if (active_window != NULL)
             {
                 //TXT_OpenWindowHelpURL(active_window);
+                put("TXT_OpenWindowHelpURL not supported!");
             }
             break;
 
