@@ -15,7 +15,7 @@
 void blinkmain(void *pvParameter)
 {
     // make LED Output
-    gpio_pad_select_gpio(2); 
+    gpio_pad_select_gpio(2);
     gpio_set_direction(2, GPIO_MODE_OUTPUT);
 
     while (1) {
@@ -52,7 +52,7 @@ void app_main()
     // Blinktask
     xTaskCreate(&blinkmain, "doom_blink_task", configMINIMAL_STACK_SIZE, NULL, 5, NULL);
 
-    // Doomtask
-    xTaskCreate(&odroiddoommain, "doom_main_task", configMINIMAL_STACK_SIZE, NULL, 5, NULL);
+    // Doomtask -> Stacksize of 512 Words - which means 2048 Bytes
+    xTaskCreate(&odroiddoommain, "doom_main_task", 512, NULL, 5, NULL);
 }
 
