@@ -569,7 +569,7 @@ int SDLCALL SDL_ShowSimpleMessageBox(Uint32 flags, const char *title, const char
     return 0;
 }
 
-void SDLCALL SDL_StartTextInputs(void)
+void SDLCALL SDL_StartTextInput(void)
 {
     puts("SDL_StartTextInput");
     /* TODO */
