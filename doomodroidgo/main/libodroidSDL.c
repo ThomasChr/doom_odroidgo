@@ -576,7 +576,7 @@ void SDLCALL SDL_StartTextInput(void)
     return;
 }
 
-void SDLCALL SDL_StopTextInputs(void)
+void SDLCALL SDL_StopTextInput(void)
 {
     puts("SDL_StopTextInput");
     /* TODO */
