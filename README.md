@@ -40,11 +40,11 @@ cd doomodroidgo
 make clean
 make
 ```
--> Grab the files '/build/bootloader/bootloader.bin', '/build/doomodroidgo.bin' and '/build/partitions.bin'
+-> Grab the files '/build/bootloader/bootloader.bin', '/build/doomodroidgo.bin' and '/build/partitions_singleapp.bin'
 
 On the flashing computer:
 ```
 pip3 install esptool
-esptool.py --chip esp32 --port COM41 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 c:\temp\bootloader.bin 0x10000 c:\temp\doomodroidgo.bin 0x8000 c:\temp\partitions.bin
+esptool.py --chip esp32 --port COM41 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 c:\temp\bootloader.bin 0x10000 c:\temp\doomodroidgo.bin 0x8000 c:\temp\partitions_singleapp.bin
 (for Linux Port is something like '/dev/ttyUSB0')
 ```
