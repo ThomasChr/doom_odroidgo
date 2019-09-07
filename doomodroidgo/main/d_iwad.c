@@ -851,6 +851,11 @@ char *D_FindIWAD(int mask, GameMission_t *mission)
     // @arg <file>
     //
 
+    strcpy(result, "DOOM.WAD");
+    return result;
+
+
+
     iwadparm = M_CheckParmWithArgs("-iwad", 1);
 
     if (iwadparm)
