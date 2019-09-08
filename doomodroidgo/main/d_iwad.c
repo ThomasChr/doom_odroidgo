@@ -851,8 +851,8 @@ char *D_FindIWAD(int mask, GameMission_t *mission)
     // @arg <file>
     //
 
-    result = malloc(sizeof(iwad_t *) * 8 + 1);
-    strcpy(result, "DOOM.WAD");
+    result = malloc(sizeof(iwad_t *) * 64 + 1);
+    strcpy(result, "/sdcard/DOOM.WAD");
     return result;
 
 
