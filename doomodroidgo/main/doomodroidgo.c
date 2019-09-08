@@ -11,22 +11,63 @@
 #include "i_system.h"
 #include "m_argv.h"
 
+#include "esp_vfs_fat.h"
+#include "driver/sdspi_host.h"
+#include "sdmmc_cmd.h"
+
+#define SD_PIN_NUM_MISO 19
+#define SD_PIN_NUM_MOSI 23
+#define SD_PIN_NUM_CLK  18
+#define SD_PIN_NUM_CS 22
+
 void odroiddoommain()
 {
-    puts("I'm alive");
-    //!
-    // Print the program version and exit.
-    //
-    if (M_ParmExists("-version") || M_ParmExists("--version")) {
-        puts(PACKAGE_STRING);
-        exit(0);
+    puts("I'm alive!");
+
+    // Prepare SD Card IO, print file test.txt if there for test purposes
+    // We try to read DOOM.WAD of the Sd Card later on
+    esp_err_t ret;
+
+    sdmmc_host_t host = SDSPI_HOST_DEFAULT();
+    host.slot = VSPI_HOST; // HSPI_HOST;
+    host.max_freq_khz = SDMMC_FREQ_DEFAULT;
+
+    sdspi_slot_config_t slot_config = SDSPI_SLOT_CONFIG_DEFAULT();
+    slot_config.gpio_miso = (gpio_num_t)SD_PIN_NUM_MISO;
+    slot_config.gpio_mosi = (gpio_num_t)SD_PIN_NUM_MOSI;
+    slot_config.gpio_sck  = (gpio_num_t)SD_PIN_NUM_CLK;
+    slot_config.gpio_cs = (gpio_num_t)SD_PIN_NUM_CS;
+
+    esp_vfs_fat_sdmmc_mount_config_t mount_config;
+    memset(&mount_config, 0, sizeof(mount_config));
+
+    mount_config.format_if_mount_failed = false;
+    mount_config.max_files = 5;
+
+    sdmmc_card_t* card;
+    ret = esp_vfs_fat_sdmmc_mount("/sdcard", &host, &slot_config, &mount_config, &card);
+
+    if (ret == ESP_OK) {
+        puts("Mounted SD Card");
+    } else {
+        puts("Failed to mount SD Card");
+	exit(0);
     }
 
-    M_FindResponseFile();
+    // Now try to read testfile, just for debug purposes, that is
+    FILE* f = fopen("/sdcard/test.txt", "r");
+    if (f != NULL) {
+        puts("Reading test.txt:");
+        char line[64];
+	fgets(line, sizeof(line), f);
+	fclose(f);
+	puts(line);
+    } else {
+        puts("File test.txt not found");
+    }
 
-    #ifdef SDL_HINT_NO_SIGNAL_HANDLERS
-    SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
-    #endif
+    // Normal Doom Code...
+    M_FindResponseFile();
 
     // start doom
     D_DoomMain ();
