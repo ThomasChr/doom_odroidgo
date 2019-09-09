@@ -45,14 +45,6 @@ char**		myargv;
 
 int M_CheckParmWithArgs(const char *check, int num_args)
 {
-    int i;
-
-    for (i = 1; i < myargc - num_args; i++)
-    {
-	if (!strcasecmp(check, myargv[i]))
-	    return i;
-    }
-
     return 0;
 }
 
