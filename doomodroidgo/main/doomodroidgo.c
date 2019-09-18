@@ -14,16 +14,40 @@
 #include "esp_vfs_fat.h"
 #include "driver/sdspi_host.h"
 #include "sdmmc_cmd.h"
+#include "odroid_display.h"
 
+// SDCARD
+void install_sd_card(void);
 #define SD_PIN_NUM_MISO 19
 #define SD_PIN_NUM_MOSI 23
 #define SD_PIN_NUM_CLK  18
 #define SD_PIN_NUM_CS 22
 
+// DISPLAY
+void init_lcd_display(void);
+
 void odroiddoommain()
 {
     puts("I'm alive!");
 
+    install_sd_card();
+    init_lcd_display();
+
+    // Normal Doom Code...
+    M_FindResponseFile();
+
+    // start doom
+    D_DoomMain ();
+}
+
+void app_main()
+{
+    // Doomtask -> Stacksize of 25600 Bytes (25 KB), pinned to core 0
+    xTaskCreatePinnedToCore(&odroiddoommain, "doom_main_task", 22480, NULL, 5, NULL, 0);
+}
+
+void install_sd_card()
+{
     // Prepare SD Card IO, print file test.txt if there for test purposes
     // We try to read DOOM.WAD of the Sd Card later on
     esp_err_t ret;
@@ -55,6 +79,7 @@ void odroiddoommain()
     }
 
     // Now try to read testfile, just for debug purposes, that is
+    /*
     FILE* f = fopen("/sdcard/test.txt", "r");
     if (f != NULL) {
         puts("Reading test.txt:");
@@ -65,17 +90,25 @@ void odroiddoommain()
     } else {
         puts("File test.txt not found");
     }
-
-    // Normal Doom Code...
-    M_FindResponseFile();
-
-    // start doom
-    D_DoomMain ();
+    */
 }
 
-void app_main()
+void init_lcd_display()
 {
-    // Doomtask -> Stacksize of 25600 Bytes (25 KB), pinned to core 0
-    xTaskCreatePinnedToCore(&odroiddoommain, "doom_main_task", 22480, NULL, 5, NULL, 0);
-}
+    uint16_t* buffer;
 
+    /* odroid_display.c */
+    ili9341_init();
+
+    // 320 x 240 Pixel
+    buffer = malloc(76800);
+
+    // red rectangle, 50x50 pixel, left upper corner
+    for (short x = 0; x < 50; x++) {
+        for (short y = 0; y < 50; y++) {
+            buffer[x*320+y] = 0xF0;
+        }
+    }
+
+    ili9341_write_frame(buffer);
+}
