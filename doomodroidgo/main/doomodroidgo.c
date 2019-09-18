@@ -15,6 +15,7 @@
 #include "driver/sdspi_host.h"
 #include "sdmmc_cmd.h"
 #include "odroid_display.h"
+#include "odroid_sdcard.h"
 
 // SDCARD
 void install_sd_card(void);
@@ -30,7 +31,7 @@ void odroiddoommain()
 {
     puts("I'm alive!");
 
-    install_sd_card();
+    install_sd_card();    
     init_lcd_display();
 
     // Normal Doom Code...
@@ -50,33 +51,7 @@ void install_sd_card()
 {
     // Prepare SD Card IO, print file test.txt if there for test purposes
     // We try to read DOOM.WAD of the Sd Card later on
-    esp_err_t ret;
-
-    sdmmc_host_t host = SDSPI_HOST_DEFAULT();
-    host.slot = VSPI_HOST; // HSPI_HOST;
-    host.max_freq_khz = SDMMC_FREQ_DEFAULT;
-
-    sdspi_slot_config_t slot_config = SDSPI_SLOT_CONFIG_DEFAULT();
-    slot_config.gpio_miso = (gpio_num_t)SD_PIN_NUM_MISO;
-    slot_config.gpio_mosi = (gpio_num_t)SD_PIN_NUM_MOSI;
-    slot_config.gpio_sck  = (gpio_num_t)SD_PIN_NUM_CLK;
-    slot_config.gpio_cs = (gpio_num_t)SD_PIN_NUM_CS;
-
-    esp_vfs_fat_sdmmc_mount_config_t mount_config;
-    memset(&mount_config, 0, sizeof(mount_config));
-
-    mount_config.format_if_mount_failed = false;
-    mount_config.max_files = 5;
-
-    sdmmc_card_t* card;
-    ret = esp_vfs_fat_sdmmc_mount("/sdcard", &host, &slot_config, &mount_config, &card);
-
-    if (ret == ESP_OK) {
-        puts("Mounted SD Card");
-    } else {
-        puts("Failed to mount SD Card");
-	exit(0);
-    }
+    odroid_sdcard_open("/sdcard");
 
     // Now try to read testfile, just for debug purposes, that is
     /*
@@ -99,16 +74,21 @@ void init_lcd_display()
 
     /* odroid_display.c */
     ili9341_init();
+    ili9341_clear(0xffff);
+    puts("Display init done");
 
-    // 320 x 240 Pixel
-    buffer = malloc(76800);
-
-    // red rectangle, 50x50 pixel, left upper corner
+    // 320 x 240 Pixel, 16bit each, Color: RRRRRGGG GGGBBBBBB
+    buffer = malloc(320*240*2);
+    memset(buffer, 0, 320*240*2);
+    
+    puts("Drawing");
+    // blue rectangle, 50x50 pixel, left upper corner
     for (short x = 0; x < 50; x++) {
         for (short y = 0; y < 50; y++) {
-            buffer[x*320+y] = 0xF0;
+            buffer[x*320+y] = 0xFF00;
         }
     }
 
     ili9341_write_frame(buffer);
+    puts("Drawing done");
 }
