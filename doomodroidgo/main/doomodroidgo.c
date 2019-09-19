@@ -51,6 +51,7 @@ void install_sd_card()
 {
     // Prepare SD Card IO, print file test.txt if there for test purposes
     // We try to read DOOM.WAD of the Sd Card later on
+    /* odroid_sdcard.c */
     odroid_sdcard_open("/sdcard");
 
     // Now try to read testfile, just for debug purposes, that is
