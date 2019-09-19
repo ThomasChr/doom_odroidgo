@@ -34,7 +34,7 @@ mkdir doomodroid
 cd doomodroid
 git clone https://github.com/ThomasChr/doom_odroidgo.git .
 git clone --recursive https://github.com/espressif/esp-idf.git
-sudo ./esp-idf/install.sh
+./esp-idf/install.sh
 . ./esp-idf/export.sh
 cd doomodroidgo
 make clean
