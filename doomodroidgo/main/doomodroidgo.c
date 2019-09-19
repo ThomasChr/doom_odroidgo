@@ -27,6 +27,8 @@ void install_sd_card(void);
 // DISPLAY
 void init_lcd_display(void);
 
+void D_DoomMain(void);
+
 void odroiddoommain()
 {
     puts("I'm alive!");
