@@ -1,13 +1,22 @@
-Doom Port for the Odroid Go
-Based on Chocolate Doom: https://github.com/chocolate-doom/chocolate-doom
+# Doom Port for the Odroid Go
+### Based on Chocolate Doom: https://github.com/chocolate-doom/chocolate-doom
 
-Should provide:
+## Should provide:
 - Graphics
 - Movement
 - Sound
 - Save/Load
 - Multiplayer (2 players, maybe up to 4)
 
+## Build setup
+### Using Docker
+```
+docker build -t doom_odroid_go . # Build Docker Image
+docker run --rm -v $(pwd):/app --device=/dev/ttyUSB0 -it doom_odroidgo_docker bash # Run with /dev/ttyUSB0 handed over to the container
+```
+After that, cd to /app and use it as on your local machine.
+
+### Manual setup
 Installing of ESP32-IDF/FreeRTOS (on Ubuntu Linux):
 (fetched on 20.08.2019)
 ```
