@@ -78,7 +78,7 @@ void init_lcd_display()
     ili9341_clear(0xffff);
     puts("Display init done");
 
-    // 320 x 240 Pixel, 16bit each, Color: RRRRRGGG GGGBBBBBB
+    // 320 x 240 Pixel, 16bit each, Color: RRRRRGGG GGGBBBBB
     buffer = malloc(320*240*2);
     memset(buffer, 0, 320*240*2);
     
