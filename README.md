@@ -16,6 +16,11 @@ docker run --rm -v $(pwd):/app --device=/dev/ttyUSB0 -it doom_odroidgo_docker ba
 ```
 After that, cd to /app and use it as on your local machine.
 
+### Using Docker-Compose
+```
+docker-compose run esp-idf
+```
+
 ### Manual setup
 Installing of ESP32-IDF/FreeRTOS (on Ubuntu Linux):
 (fetched on 20.08.2019)
@@ -25,7 +30,7 @@ git clone --recursive https://github.com/espressif/esp-idf.git
 sudo ./esp-idf/install.sh
 ```
 
-Making and Flashing commands used (on Ubuntu Linux): 
+Making and Flashing commands used (on Ubuntu Linux):
 ```
 . ./esp-idf/export.sh
 cd doomodroidgo
