@@ -25,3 +25,5 @@ RUN apt-get update && apt-get install -y \
 RUN git clone --recursive https://github.com/espressif/esp-idf.git
 RUN ./esp-idf/install.sh
 RUN echo ". /esp-idf/export.sh" >> /root/.bashrc
+
+WORKDIR /app
