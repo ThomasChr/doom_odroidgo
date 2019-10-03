@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+    esp-idf:
+        build:
+            context: .
+        volumes:
+            - .:/app
+        devices:
+            - /dev/ttyUSB0:/dev/ttyUSB0
