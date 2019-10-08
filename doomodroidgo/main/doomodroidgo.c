@@ -17,6 +17,8 @@
 #include "odroid_display.h"
 #include "odroid_sdcard.h"
 
+#include <driver/dac.h>
+
 // SDCARD
 void install_sd_card(void);
 #define SD_PIN_NUM_MISO 19
@@ -27,14 +29,18 @@ void install_sd_card(void);
 // DISPLAY
 void init_lcd_display(void);
 
+// DAC
+void init_dac(void);
+
 void D_DoomMain(void);
 
 void odroiddoommain()
 {
     puts("I'm alive!");
 
-    install_sd_card();    
+    install_sd_card();
     init_lcd_display();
+    init_dac();
 
     // Normal Doom Code...
     M_FindResponseFile();
@@ -83,7 +89,7 @@ void init_lcd_display()
     // 320 x 240 Pixel, 16bit each, Color: RRRRRGGG GGGBBBBB (RGB565)
     buffer = malloc(320*240*2);
     memset(buffer, 0, 320*240*2);
-    
+
     puts("Drawing");
     // blue rectangle, 50x50 pixel, left upper corner
     for (short x = 0; x < 50; x++) {
@@ -94,4 +100,23 @@ void init_lcd_display()
 
     ili9341_write_frame(buffer);
     puts("Drawing done");
+}
+
+void init_dac()
+{
+    dac_channel_t dac_channel = DAC_CHANNEL_1;
+    gpio_num_t gpio_num = 26;
+
+    dac_output_enable(dac_channel);
+    dac_output_voltage(dac_channel, 255);
+
+    gpio_pad_select_gpio(gpio_num);
+    gpio_set_direction(gpio_num, GPIO_MODE_OUTPUT);
+    for (int i = 0; i < 50; i++) {
+        gpio_set_level(gpio_num, 0);
+        // wait for x ms
+        vTaskDelay(10 / portTICK_PERIOD_MS);
+        gpio_set_level(gpio_num, 1);
+        vTaskDelay(2 / portTICK_PERIOD_MS);
+    }
 }
